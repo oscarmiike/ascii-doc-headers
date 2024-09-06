@@ -31,53 +31,73 @@
 
 <body>
 
-    <h1>ASCII Heading Generator</h1>
+    <h4>
+        <div>
+            █▀▀█&nbsp;█▀▀&nbsp;█▀▀&nbsp;▀█▀&nbsp;▀█▀&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;█▀▀▄&nbsp;█▀▀█&nbsp;█▀▀&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;█&nbsp;&nbsp;█&nbsp;█▀▀&nbsp;█▀▀█&nbsp;█▀▀▄&nbsp;█▀▀&nbsp;█▀▀█&nbsp;█▀▀&nbsp;
+        </div>
+        <div>
+            █▄▄█&nbsp;▀▀█&nbsp;█&nbsp;&nbsp;&nbsp;&nbsp;█&nbsp;&nbsp;&nbsp;█&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;█&nbsp;&nbsp;█&nbsp;█&nbsp;&nbsp;█&nbsp;█&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;█▀▀█&nbsp;█▀▀&nbsp;█▄▄█&nbsp;█&nbsp;&nbsp;█&nbsp;█▀▀&nbsp;█▄▄▀&nbsp;▀▀█&nbsp;
+        </div>
+        <div>
+            ▀&nbsp;&nbsp;▀&nbsp;▀▀▀&nbsp;▀▀▀&nbsp;▀▀▀&nbsp;▀▀▀&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▀▀▀&nbsp;&nbsp;▀▀▀▀&nbsp;▀▀▀&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▀&nbsp;&nbsp;▀&nbsp;▀▀▀&nbsp;▀&nbsp;&nbsp;▀&nbsp;▀▀▀&nbsp;&nbsp;▀▀▀&nbsp;▀&nbsp;▀▀&nbsp;▀▀▀&nbsp;
+        </div>
+    </h4>
 
     <label for="inputText">Enter text:</label>
-    <textarea id="inputText"></textarea>
+    <textarea id="inputText" oninput="generateAscii(); stopTyping();" onfocus="stopTyping()"></textarea>
 
-    <button onclick="generateAscii()">Generate ASCII Heading</button>
     <pre id="output"></pre>
 
     <script>
         const asciiMap = {
-            'A': ['█▀▀█ ','█▄▄█ ','▀  ▀ '],
-            'B': ['█▀▀▄ ','█▀▀▄ ','▀▀▀  '],
-            'C': ['█▀▀ ','█   ','▀▀▀ '],
-            'D': ['█▀▀▄ ','█  █ ','▀▀▀  '],
-            'E': ['█▀▀ ','█▀▀ ','▀▀▀ '],
-            'F': ['█▀▀ ','█▀▀ ','▀   '],
-            'G': ['█▀▀▀ ','█ ▀█ ','▀▀▀▀ '],
-            'H': ['█  █ ','█▀▀█ ','▀  ▀ '],
-            'I': ['▀█▀ ',' █  ','▀▀▀ '],
-            'J': ['  ▀ ','  █ ','█▄█ '],
-            'K': ['█ █ ','█▀▄ ','▀ ▀ '],
-            'L': ['█   ','█   ','▀▀▀ '],
-            'M': ['█▀▄▀█ ','█ ▀ █ ','▀   ▀ '],
-            'N': ['█▀▀▄ ','█  █ ','▀  ▀ '],
-            'O': ['█▀▀█ ','█  █ ','▀▀▀▀ '],
-            'P': ['█▀▀█ ','█  █ ','█▀▀▀ '],
-            'Q': ['█▀▀█ ','█  █ ','▀▀▀█ '],
-            'R': ['█▀▀█ ','█▄▄▀ ','▀ ▀▀ '],
-            'S': ['█▀▀ ','▀▀█ ','▀▀▀ '],
-            'T': ['▀▀█▀▀ ','  █   ','  ▀   '],
-            'U': ['█  █ ','█  █ ',' ▀▀▀ '],
-            'V': ['▀█ █▀ ',' █▄█  ','  ▀   '],
-            'W': ['█   █ ','█▄█▄█ ',' ▀ ▀  '],
-            'X': ['█ █ ','▄▀▄ ','▀ ▀ '],
-            'Y': ['█  █ ','█▄▄█ ','▄▄▄█ '],
-            'Z': ['▀▀█ ','▄▀  ','▀▀▀ '],
-            ' ': ['    ','    ','    '],
-            '!': [' █   ',' ▀   ',' ▄   '],
-            '?': ['▀█ ','█▀ ','▄  '],
-            '.': ['    ','    ',' ▀  ']
+            'A': ['█▀▀█ ', '█▄▄█ ', '▀  ▀ '],
+            'B': ['█▀▀▄ ', '█▀▀▄ ', '▀▀▀  '],
+            'C': ['█▀▀ ', '█   ', '▀▀▀ '],
+            'D': ['█▀▀▄ ', '█  █ ', '▀▀▀  '],
+            'E': ['█▀▀ ', '█▀▀ ', '▀▀▀ '],
+            'F': ['█▀▀ ', '█▀▀ ', '▀   '],
+            'G': ['█▀▀▀ ', '█ ▀█ ', '▀▀▀▀ '],
+            'H': ['█  █ ', '█▀▀█ ', '▀  ▀ '],
+            'I': ['▀█▀ ', ' █  ', '▀▀▀ '],
+            'J': ['  ▀ ', '  █ ', '█▄█ '],
+            'K': ['█ █ ', '█▀▄ ', '▀ ▀ '],
+            'L': ['█   ', '█   ', '▀▀▀ '],
+            'M': ['█▀▄▀█ ', '█ ▀ █ ', '▀   ▀ '],
+            'N': ['█▀▀▄ ', '█  █ ', '▀  ▀ '],
+            'O': ['█▀▀█ ', '█  █ ', '▀▀▀▀ '],
+            'P': ['█▀▀█ ', '█  █ ', '█▀▀▀ '],
+            'Q': ['█▀▀█ ', '█  █ ', '▀▀▀█ '],
+            'R': ['█▀▀█ ', '█▄▄▀ ', '▀ ▀▀ '],
+            'S': ['█▀▀ ', '▀▀█ ', '▀▀▀ '],
+            'T': ['▀▀█▀▀ ', '  █   ', '  ▀   '],
+            'U': ['█  █ ', '█  █ ', ' ▀▀▀ '],
+            'V': ['▀█ █▀ ', ' █▄█  ', '  ▀   '],
+            'W': ['█   █ ', '█▄█▄█ ', ' ▀ ▀  '],
+            'X': ['█ █ ', '▄▀▄ ', '▀ ▀ '],
+            'Y': ['█  █ ', '█▄▄█ ', '▄▄▄█ '],
+            'Z': ['▀▀█ ', '▄▀  ', '▀▀▀ '],
+            ' ': ['    ', '    ', '    '],
+            '!': [' █   ', ' ▀   ', ' ▄   '],
+            '?': ['▀█ ', '█▀ ', '▄  '],
+            '.': ['    ', '    ', ' ▀  ']
         };
 
 
-        
+
         // █▀▀█  █▀▀█  █▀▀█  █▀▀▄  █▀▀▀  █▀▀▀  █▀▀█  █  █ ▀█▀     █  █ ▄▀  █     █▀▄▀█  █▄  █  █▀▀▀█  █▀▀█  █▀▀█  █▀▀█  █▀▀▀█ ▀▀█▀▀  █  █  █   █  █   █ ▀▄ ▄▀  █   █ 
         // █▄▄█  █▀▀▄  █     █  █  █▀▀▀  █▀▀▀  █ ▄▄  █▀▀█  █   ▄  █  █▀▄   █     █ █ █  █ █ █  █   █  █▄▄█  █  █  █▄▄▀  ▀▀▀▄▄   █    █  █   █ █   █ █ █   █    █▄▄▄█ 
         // █  █  █▄▄█  █▄▄█  █▄▄▀  █▄▄▄  █     █▄▄█  █  █ ▄█▄  █▄▄█  █  █  █▄▄█  █   █  █  ▀█  █▄▄▄█  █     ▀▀█▄  █  █  █▄▄▄█   █    ▀▄▄▀   ▀▄▀   █▄▀▄█ ▄▀ ▀▄    █  
+
+
+        let typingInterval;
+        const randomSentences = [
+            "HELLO WORLD!",
+            "ASCII ART IS FUN",
+            "NETSUITE RESTLET SCRIPTS",
+            "TYPING SIMULATION",
+            "DYNAMIC ASCII GENERATOR"
+        ];
+
 
         function generateAscii() {
             const input = document.getElementById('inputText').value;
@@ -94,6 +114,43 @@
 
             document.getElementById('output').innerText = lines.join('\n');
         }
+
+        function startTyping() {
+            // Stop any existing typing
+            stopTyping();
+
+            // Start typing random sentences after 1 second of being idle (not focused)
+            typingInterval = setInterval(() => {
+                typeRandomSentence();
+            }, 3000); // Delay before starting typing
+        }
+
+        function stopTyping() {
+            clearInterval(typingInterval); // Stop typing when the user is typing manually
+        }
+
+        function typeRandomSentence() {
+            const textarea = document.getElementById('inputText');
+            const randomSentence = randomSentences[Math.floor(Math.random() * randomSentences.length)];
+            let i = 0;
+
+            // Clear the textarea and start "typing" the random sentence
+            textarea.value = '';
+            const typingEffect = setInterval(() => {
+                if (i < randomSentence.length) {
+                    textarea.value += randomSentence[i];
+                    generateAscii(); // Update the ASCII art with each character
+                    i++;
+                } else {
+                    clearInterval(typingEffect); // Stop typing when the sentence is fully typed
+                }
+            }, 200); // Speed of typing
+        }
+
+        // Start auto typing if the user isn't focused
+        window.addEventListener('load', startTyping);
+        window.addEventListener('blur', startTyping);
+        window.addEventListener('focus', stopTyping);
     </script>
 
 </body>
