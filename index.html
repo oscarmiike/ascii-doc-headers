@@ -4,11 +4,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ASCII Heading Generator</title>
+    <title>ASCII Heading Generator - Expanding Header</title>
     <style>
         body {
             font-family: monospace;
-            margin: 20px;
+            margin: 0;
+            padding: 0;
+            background-color: #1e1e1e;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .header-container {
+            position: relative;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            overflow: visible;
+            margin-bottom: 60px;
+        }
+
+        header {
+            font-family: monospace;
+            font-size: 13px;
+            white-space: pre;
+            color: #4CAF50;
+            text-align: center;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: all 0.3s ease;
+        }
+
+        .input-container {
+            width: 100%;
+            max-width: 550px;
+            padding: 0 20px;
+            box-sizing: border-box;
         }
 
         textarea {
@@ -16,37 +52,57 @@
             height: 100px;
             font-family: monospace;
             font-size: 16px;
+            background-color: #2d2d2d;
+            color: #ffffff;
+            border: 1px solid #444;
+            padding: 10px;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.3s ease;
+            resize: none;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
         }
 
-        pre {
-            font-family: monospace;
-            font-size: 16px;
-            white-space: pre;
-            border: 1px solid #ddd;
-            padding: 10px;
-            background-color: #f9f9f9;
+        textarea:focus {
+            border-color: #4CAF50;
+        }
+
+        .tooltip {
+            position: absolute;
+            background-color: #333;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            white-space: nowrap;
+            z-index: 1000;
+        }
+
+        .tooltip::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #333 transparent transparent transparent;
         }
     </style>
 </head>
 
 <body>
-
-    <h4>
-        <div>
-            █▀▀█&nbsp;█▀▀&nbsp;█▀▀&nbsp;▀█▀&nbsp;▀█▀&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;█▀▀▄&nbsp;█▀▀█&nbsp;█▀▀&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;█&nbsp;&nbsp;█&nbsp;█▀▀&nbsp;█▀▀█&nbsp;█▀▀▄&nbsp;█▀▀&nbsp;█▀▀█&nbsp;█▀▀&nbsp;
-        </div>
-        <div>
-            █▄▄█&nbsp;▀▀█&nbsp;█&nbsp;&nbsp;&nbsp;&nbsp;█&nbsp;&nbsp;&nbsp;█&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;█&nbsp;&nbsp;█&nbsp;█&nbsp;&nbsp;█&nbsp;█&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;█▀▀█&nbsp;█▀▀&nbsp;█▄▄█&nbsp;█&nbsp;&nbsp;█&nbsp;█▀▀&nbsp;█▄▄▀&nbsp;▀▀█&nbsp;
-        </div>
-        <div>
-            ▀&nbsp;&nbsp;▀&nbsp;▀▀▀&nbsp;▀▀▀&nbsp;▀▀▀&nbsp;▀▀▀&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▀▀▀&nbsp;&nbsp;▀▀▀▀&nbsp;▀▀▀&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▀&nbsp;&nbsp;▀&nbsp;▀▀▀&nbsp;▀&nbsp;&nbsp;▀&nbsp;▀▀▀&nbsp;&nbsp;▀▀▀&nbsp;▀&nbsp;▀▀&nbsp;▀▀▀&nbsp;
-        </div>
-    </h4>
-
-    <label for="inputText">Enter text:</label>
-    <textarea id="inputText" oninput="generateAscii(); stopTyping();" onfocus="stopTyping()"></textarea>
-
-    <pre id="output"></pre>
+    <div class="header-container">
+        <header id="headerAscii"></header>
+        <div id="tooltip" class="tooltip"></div>
+    </div>
+    <div class="input-container">
+        <textarea id="inputText" placeholder="Enter text:"></textarea>
+    </div>
 
     <script>
         const asciiMap = {
@@ -69,7 +125,7 @@
             'Q': ['█▀▀█ ', '█  █ ', '▀▀▀█ '],
             'R': ['█▀▀█ ', '█▄▄▀ ', '▀ ▀▀ '],
             'S': ['█▀▀ ', '▀▀█ ', '▀▀▀ '],
-            'T': ['▀▀█▀▀ ', '  █   ', '  ▀   '],
+            'T': ['▀█▀ ', ' █  ', ' ▀  '],
             'U': ['█  █ ', '█  █ ', ' ▀▀▀ '],
             'V': ['▀█ █▀ ', ' █▄█  ', '  ▀   '],
             'W': ['█   █ ', '█▄█▄█ ', ' ▀ ▀  '],
@@ -89,68 +145,157 @@
         // █  █  █▄▄█  █▄▄█  █▄▄▀  █▄▄▄  █     █▄▄█  █  █ ▄█▄  █▄▄█  █  █  █▄▄█  █   █  █  ▀█  █▄▄▄█  █     ▀▀█▄  █  █  █▄▄▄█   █    ▀▄▄▀   ▀▄▀   █▄▀▄█ ▄▀ ▀▄    █  
 
 
-        let typingInterval;
-        const randomSentences = [
-            "HELLO WORLD!",
-            "ASCII ART IS FUN",
-            "NETSUITE RESTLET SCRIPTS",
-            "TYPING SIMULATION",
-            "DYNAMIC ASCII GENERATOR"
-        ];
 
+        const validChars = Object.keys(asciiMap).filter(char => char.match(/[A-Z]/));
+        const titleText = "ASCII DOC HEADERS";
+        let charStates = [];
+        let animationFrameId;
 
-        function generateAscii() {
-            const input = document.getElementById('inputText').value;
-            const lines = ['', '', ''];  // Array to hold each line of the result
+        function initializeCharStates() {
+            charStates = titleText.split('').map(char => ({
+                currentChar: char,
+                isChanging: false,
+                changeTimer: 0,
+                changeDuration: getRandomDuration()
+            }));
+        }
 
-            for (const char of input.toUpperCase()) {
-                const asciiChar = asciiMap[char];
-                if (asciiChar) {
-                    lines[0] += asciiChar[0];
-                    lines[1] += asciiChar[1];
-                    lines[2] += asciiChar[2];
-                }
+        function getRandomDuration() {
+            return Math.random() * 10 + 3000; // Random duration between 3000ms and 3010ms
+        }
+
+        function generateAsciiArt(text) {
+            const lines = ['', '', ''];
+            for (const char of text.toUpperCase()) {
+                const asciiChar = asciiMap[char] || asciiMap[' '];
+                lines[0] += asciiChar[0];
+                lines[1] += asciiChar[1];
+                lines[2] += asciiChar[2];
             }
-
-            document.getElementById('output').innerText = lines.join('\n');
+            return lines.join('\n');
         }
 
-        function startTyping() {
-            // Stop any existing typing
-            stopTyping();
-
-            // Start typing random sentences after 1 second of being idle (not focused)
-            typingInterval = setInterval(() => {
-                typeRandomSentence();
-            }, 3000); // Delay before starting typing
+        function easeInOutQuad(t) {
+            return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
         }
 
-        function stopTyping() {
-            clearInterval(typingInterval); // Stop typing when the user is typing manually
-        }
+        function animate(time) {
+            let currentText = '';
 
-        function typeRandomSentence() {
-            const textarea = document.getElementById('inputText');
-            const randomSentence = randomSentences[Math.floor(Math.random() * randomSentences.length)];
-            let i = 0;
+            charStates.forEach((state, index) => {
+                if (state.isChanging) {
+                    state.changeTimer += 16.67; // Approximate for 60fps
 
-            // Clear the textarea and start "typing" the random sentence
-            textarea.value = '';
-            const typingEffect = setInterval(() => {
-                if (i < randomSentence.length) {
-                    textarea.value += randomSentence[i];
-                    generateAscii(); // Update the ASCII art with each character
-                    i++;
-                } else {
-                    clearInterval(typingEffect); // Stop typing when the sentence is fully typed
+                    // Apply ramp function to the progress
+                    const progress = state.changeTimer / state.changeDuration;
+                    const easedProgress = easeInOutQuad(progress);
+
+                    if (progress < 1) {
+                        // Adjust the rate of letter changes based on the eased progress
+                        const changeRate = 100 + 400 * (1 - easedProgress); // Changes more frequently in the middle
+                        if (Math.floor(state.changeTimer / changeRate) >
+                            Math.floor((state.changeTimer - 16.67) / changeRate)) {
+                            state.currentChar = validChars[Math.floor(Math.random() * validChars.length)];
+                        }
+                    } else {
+                        state.currentChar = titleText[index];
+                        state.isChanging = false;
+                        state.changeTimer = 0;
+                    }
+                } else if (charStates.filter(s => s.isChanging).length < 2 && Math.random() < 0.0001) {
+                    state.isChanging = true;
+                    state.changeTimer = 0;
+                    state.changeDuration = getRandomDuration();
                 }
-            }, 200); // Speed of typing
+
+                currentText += state.currentChar;
+            });
+
+            document.getElementById('headerAscii').innerText = generateAsciiArt(currentText);
+            animationFrameId = requestAnimationFrame(animate);
         }
 
-        // Start auto typing if the user isn't focused
-        window.addEventListener('load', startTyping);
-        window.addEventListener('blur', startTyping);
-        window.addEventListener('focus', stopTyping);
+        function startAnimation() {
+            if (!animationFrameId) {
+                initializeCharStates();
+                animationFrameId = requestAnimationFrame(animate);
+            }
+        }
+
+        function stopAnimation() {
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+                animationFrameId = null;
+            }
+        }
+
+        const inputText = document.getElementById('inputText');
+
+        inputText.addEventListener('input', () => {
+            const userInput = inputText.value.toUpperCase();
+            if (userInput) {
+                stopAnimation();
+                document.getElementById('headerAscii').innerText = generateAsciiArt(userInput);
+            } else {
+                startAnimation();
+            }
+        });
+
+        function copyToClipboard() {
+            const headerText = document.getElementById('headerAscii').innerText;
+            navigator.clipboard.writeText(headerText).then(() => {
+                // Update tooltip text
+                tooltip.textContent = '(╯°□°）╯︵ ┻━┻';
+                const originalColor = document.getElementById('headerAscii').style.color;
+                document.getElementById('headerAscii').style.color = '#ff0000';
+                showTooltip();
+                setTimeout(() => {
+                    tooltip.textContent = '...';
+                    hideTooltip();
+                }, 2000);
+                setTimeout(() => {
+                    document.getElementById('headerAscii').style.color = originalColor;
+                }, 200);
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+            });
+        }
+
+        // Tooltip functionality
+        const header = document.getElementById('headerAscii');
+        const tooltip = document.createElement('div');
+        tooltip.className = 'tooltip';
+        tooltip.textContent = '...';
+        document.body.appendChild(tooltip);
+
+        function showTooltip() {
+            const headerRect = header.getBoundingClientRect();
+            const tooltipRect = tooltip.getBoundingClientRect();
+
+            tooltip.style.left = `${headerRect.left + (headerRect.width / 2) - (tooltipRect.width / 2)}px`;
+            tooltip.style.top = `${headerRect.top - tooltipRect.height - 10}px`;
+            tooltip.style.opacity = '1';
+        }
+
+        function hideTooltip() {
+            tooltip.style.opacity = '0';
+        }
+
+        header.addEventListener('mouseenter', showTooltip);
+        header.addEventListener('mouseleave', hideTooltip);
+        header.addEventListener('click', copyToClipboard);
+
+        window.addEventListener('load', () => {
+            document.getElementById('headerAscii').innerText = generateAsciiArt(titleText);
+            startAnimation();
+
+            window.addEventListener('resize', () => {
+                if (tooltip.style.opacity !== '0') {
+                    showTooltip();
+                }
+            });
+        });
+
     </script>
 
 </body>
