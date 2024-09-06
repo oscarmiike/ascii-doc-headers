@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASCII Heading Generator</title>
+    <style>
+        body {
+            font-family: monospace;
+            margin: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            font-family: monospace;
+            font-size: 16px;
+        }
+
+        pre {
+            font-family: monospace;
+            font-size: 16px;
+            white-space: pre;
+            border: 1px solid #ddd;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>ASCII Heading Generator</h1>
+
+    <label for="inputText">Enter text:</label>
+    <textarea id="inputText"></textarea>
+
+    <button onclick="generateAscii()">Generate ASCII Heading</button>
+    <pre id="output"></pre>
+
+    <script>
+        const asciiMap = {
+            'A': ['█▀▀█ ','█▄▄█ ','▀  ▀ '],
+            'B': ['█▀▀▄ ','█▀▀▄ ','▀▀▀  '],
+            'C': ['█▀▀ ','█   ','▀▀▀ '],
+            'D': ['█▀▀▄ ','█  █ ','▀▀▀  '],
+            'E': ['█▀▀ ','█▀▀ ','▀▀▀ '],
+            'F': ['█▀▀ ','█▀▀ ','▀   '],
+            'G': ['█▀▀▀ ','█ ▀█ ','▀▀▀▀ '],
+            'H': ['█  █ ','█▀▀█ ','▀  ▀ '],
+            'I': ['▀█▀ ',' █  ','▀▀▀ '],
+            'J': ['  ▀ ','  █ ','█▄█ '],
+            'K': ['█ █ ','█▀▄ ','▀ ▀ '],
+            'L': ['█   ','█   ','▀▀▀ '],
+            'M': ['█▀▄▀█ ','█ ▀ █ ','▀   ▀ '],
+            'N': ['█▀▀▄ ','█  █ ','▀  ▀ '],
+            'O': ['█▀▀█ ','█  █ ','▀▀▀▀ '],
+            'P': ['█▀▀█ ','█  █ ','█▀▀▀ '],
+            'Q': ['█▀▀█ ','█  █ ','▀▀▀█ '],
+            'R': ['█▀▀█ ','█▄▄▀ ','▀ ▀▀ '],
+            'S': ['█▀▀ ','▀▀█ ','▀▀▀ '],
+            'T': ['▀▀█▀▀ ','  █   ','  ▀   '],
+            'U': ['█  █ ','█  █ ',' ▀▀▀ '],
+            'V': ['▀█ █▀ ',' █▄█  ','  ▀   '],
+            'W': ['█   █ ','█▄█▄█ ',' ▀ ▀  '],
+            'X': ['█ █ ','▄▀▄ ','▀ ▀ '],
+            'Y': ['█  █ ','█▄▄█ ','▄▄▄█ '],
+            'Z': ['▀▀█ ','▄▀  ','▀▀▀ '],
+            ' ': ['    ','    ','    '],
+            '!': [' █   ',' ▀   ',' ▄   '],
+            '?': ['▀█ ','█▀ ','▄  '],
+            '.': ['    ','    ',' ▀  ']
+        };
+
+
+        function generateAscii() {
+            const input = document.getElementById('inputText').value;
+            const lines = ['', '', ''];  // Array to hold each line of the result
+
+            for (const char of input.toUpperCase()) {
+                const asciiChar = asciiMap[char];
+                if (asciiChar) {
+                    lines[0] += asciiChar[0];
+                    lines[1] += asciiChar[1];
+                    lines[2] += asciiChar[2];
+                }
+            }
+
+            document.getElementById('output').innerText = lines.join('\n');
+        }
+    </script>
+
+</body>
+
+</html>
