@@ -1,4 +1,3 @@
 
-[▀▀█ █▀▀ █▀▀ ▀█▀ ▀█▀     █▀▀▄ █▀▀█ █▀▀     █  █ █▀▀ █▀▀█ █▀▀▄ █▀▀ █▀▀█ █▀▀ 
-▀  ▀ ▀▀▀ ▀▀▀ ▀▀▀▀ ▀▀▀  ▀▀▀ ▀ ▀▀ ▀▀▀ ](https://oscarmiike.github.io/ASCII-Heading-Generator/)
+[▀▀█ █▀▀ █▀▀ ▀█▀ ▀█▀     █▀▀▄ █▀▀█ █▀▀     █  █ █▀▀ █▀▀█ █▀▀▄ █▀▀ █▀▀█ █▀▀ ▀ ](https://oscarmiike.github.io/ascii-doc-headers/)
 
